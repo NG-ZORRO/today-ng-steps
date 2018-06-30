@@ -1,0 +1,54 @@
+@import "../../../assets/less/variables";
+
+div.page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px;
+    max-height: 420px;
+    height: 60vh;
+    min-width: 300px;
+    width: 30vw;
+    max-width: 400px;
+    padding: 40px 30px 10px;
+    border-radius: 8px;
+    background-color: white;
+
+    img.logo-img {
+      flex: 0 0 120px;
+      width: 120px;
+      height: 120px;
+    }
+
+    .text-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+
+      .title-text {
+        font-size: 24px;
+        font-style: italic;
+        color: @grey-text;
+      }
+    }
+
+    button {
+      margin-top: 26px;
+      width: 100%;
+    }
+
+    .copy-right {
+      margin-top: 30px;
+      flex: 0 0 40px;
+
+    }
+  }
+}
