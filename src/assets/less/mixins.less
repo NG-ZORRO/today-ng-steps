@@ -1,0 +1,17 @@
+@import "./variables";
+
+.floating-btn {
+  padding: 12px;
+  transition: all 0.2s linear;
+
+  span {
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    transform: translate3d(0, -2px, 0);
+    span {
+      color: @danger;
+    }
+  }
+}
