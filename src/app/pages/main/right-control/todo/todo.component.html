@@ -1,20 +1,50 @@
-<nz-list *ngIf="todos.length > 0"
-         [nzDataSource]="todos"
-         [nzRenderItem]="item"
-         [nzItemLayout]="'horizontal'">
-  <ng-template #item
-               let-item>
-    <nz-list-item class="todo-item"
-                  (click)="click(item._id)">
-      <nz-list-item-meta [nzTitle]="nzTitle">
+<nz-list *ngIf="todos.length > 0" [nzDataSource]="todos" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+  <ng-template #item let-item>
+    <nz-list-item class="todo-item" (click)="click(item._id)" (contextmenu)="contextMenu($event, todoContextRef, item._id)">
+      <nz-list-item-meta [nzTitle]="nzTitle" [nzDescription]="nzDescription">
         <ng-template #nzTitle>
-          <label nz-checkbox
-                 (click)="$event.stopPropagation()"
-                 [(ngModel)]="item.completedFlag"
-                 (ngModelChange)="toggle(item._id)"></label>
+          <label nz-checkbox (click)="$event.stopPropagation()" [(ngModel)]="item.completedFlag" (ngModelChange)="toggle(item._id)"></label>
           <span [class.strikethrough]="item.completedFlag">{{ item.title }}</span>
+        </ng-template>
+        <ng-template #nzDescription>
+          <span *ngIf="item.dueAt" class="todo-desc">
+            <i class="anticon anticon-calendar"></i> {{ item.dueAt | date }}</span>
+          <span *ngIf="item.planAt" class="todo-desc">
+            <i class="anticon anticon-clock-circle-o"></i> {{ item.planAt | date }}</span>
+          <span *ngIf="item.notifyMe" class="todo-desc">
+            <i class="anticon anticon-bell"></i>
+          </span>
+          <span *ngIf="item.desc">
+            <i class="anticon anticon-edit"></i>
+          </span>
         </ng-template>
       </nz-list-item-meta>
     </nz-list-item>
   </ng-template>
 </nz-list>
+
+<ng-template #todoContextRef>
+  <ul nz-menu nzInDropDown (nzClick)="close()">
+    <li nz-menu-item (click)="setToday()">
+      <i class="anticon anticon-home anticon-right-margin"></i>
+      <span>设为今日</span>
+    </li>
+    <li nz-submenu>
+      <span title>
+        <i class="anticon anticon-bars anticon-right-margin"></i>移动到...</span>
+      <ul>
+        <li nz-menu-item *ngIf="currentContextTodo?.listUUID !== 'todo'" (click)="moveToList('todo')">
+          默认列表
+        </li>
+        <li nz-menu-item *ngFor="let list of listsExcept(currentContextTodo.listUUID)" (click)="moveToList(list._id)">
+          {{ list.title }}
+        </li>
+      </ul>
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item (click)="delete()">
+      <i class="anticon anticon-delete anticon-right-margin danger"></i>
+      <span class="danger">删除</span>
+    </li>
+  </ul>
+</ng-template>
