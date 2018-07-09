@@ -1,0 +1,22 @@
+<div class="suggest-container container">
+  <span style="font-weight: 700;">
+    接下来打算做什么？请考虑我们的建议！
+  </span>
+  <nz-list class="suggestion-list" [nzDataSource]="suggestedTodo" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+    <ng-template #item let-item>
+      <nz-list-item class="suggestion-item" [nzActions]="[setTodayAction]">
+        <nz-list-item-meta [nzTitle]="item.title" [nzDescription]="item.desc">
+          <ng-template #nzTitle>
+            <a href="https://ng.ant.design">{{item.name.last}}</a>
+          </ng-template>
+        </nz-list-item-meta>
+        <ng-template #setTodayAction>
+          <a (click)="setTodoToday(item)">设为今日</a>
+        </ng-template>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+  <div class="no-suggestion" *ngIf="suggestedTodo.length === 0">
+    暂无建议
+  </div>
+</div>

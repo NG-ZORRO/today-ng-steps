@@ -5,12 +5,15 @@ import { ListService } from '../list/list.service';
 import { floorToMinute, ONE_HOUR, getCurrentTime } from '../../../utils/time';
 import { Todo } from '../../../domain/entities';
 import { TODOS } from '../local-storage/local-storage.namespace';
+import { RankBy } from '../../../domain/type';
 
 @Injectable()
 export class TodoService {
   todo$ = new Subject<Todo[]>();
+  rank$ = new Subject<RankBy>();
 
   private todos: Todo[] = [];
+  private rank: RankBy = 'title';
 
   constructor(
     private listService: ListService,
@@ -21,6 +24,7 @@ export class TodoService {
 
   private broadCast(): void {
     this.todo$.next(this.todos);
+    this.rank$.next(this.rank);
   }
 
   private persist(): void {
@@ -33,7 +37,6 @@ export class TodoService {
   }
 
   getRaw(): Todo[] {
-    // if (!this.todos.length) { this.todos = this.store.getList(TODOS); }
     return this.todos;
   }
 
@@ -102,5 +105,10 @@ export class TodoService {
   deleteInList(uuid: string): void {
     const toDelete = this.todos.filter(t => t.listUUID === uuid);
     toDelete.forEach(t => this.delete(t._id));
+  }
+
+  toggleRank(r: RankBy): void {
+    this.rank = r;
+    this.rank$.next(r);
   }
 }
