@@ -1,0 +1,61 @@
+@import "./variables.less";
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+body {
+  background-color: rgb(0, 21, 41);
+}
+
+.anticon-right-margin {
+  margin-right: 8px;
+}
+
+.danger {
+  color: red;
+}
+
+.to-edge {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.full-screen {
+  position: fixed;
+  .to-edge
+}
+
+.full {
+  position: absolute;
+  .to-edge
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+// https://github.com/NG-ZORRO/ng-zorro-antd/issues/1723
+nz-select.ant-fullcalendar-year-select {
+  margin-right: 5px;
+}
+
+.floating-btn {
+  padding: 12px;
+  transition: all 0.2s linear;
+
+  span {
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    transform: translate3d(0, -2px, 0);
+    span {
+      color: @danger;
+    }
+  }
+}
+
