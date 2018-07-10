@@ -18,6 +18,7 @@ import { MainModule } from './pages/main/main.module';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { ListService } from './services/list/list.service';
 import { TodoService } from './services/todo/todo.service';
+import { InitGuardService } from './services/init-guard/init-guard.service';
 
 registerLocaleData(zh);
 
@@ -35,7 +36,13 @@ registerLocaleData(zh);
     SetupModule,
     MainModule
   ],
-  providers: [ { provide: NZ_I18N, useValue: zh_CN }, LocalStorageService, ListService, TodoService ],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    LocalStorageService,
+    ListService,
+    TodoService,
+    InitGuardService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzDropdownService, NzDropdownContextComponent } from 'ng-zorro-antd';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { TodoService } from '../../../../services/todo/todo.service';
 import { ListService } from '../../../../services/list/list.service';
 import { floorToDate, getTodayTime } from '../../../../../utils/time';
 import { RankBy } from '../../../../../domain/type';
+
 
 const rankerGenerator = (type: RankBy = 'title'): any => {
   if (type === 'completeFlag') {
@@ -32,7 +34,8 @@ export class TodoComponent implements OnInit, OnDestroy {
   constructor(
     private listService: ListService,
     private todoService: TodoService,
-    private dropdownService: NzDropdownService
+    private dropdownService: NzDropdownService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -71,6 +74,10 @@ export class TodoComponent implements OnInit, OnDestroy {
 
   add(title: string): void {
     this.todoService.add(title);
+  }
+
+  click(uuid: string): void {
+    this.router.navigateByUrl(`/main/${uuid}`);
   }
 
   contextMenu(
