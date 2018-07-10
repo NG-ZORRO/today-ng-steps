@@ -15,9 +15,14 @@
   .quick-add-wrapper {
     position: absolute;
     left: 50%;
-    transform: translate3d(-50%, 0, 0);
     bottom: 40px;
     width: 400px;
+    transform: translate3d(-50%, 0, 0);
+    transition: 0.2s ease all;
+
+    &.center {
+      bottom: 50%;
+    }
   }
 }
 

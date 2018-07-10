@@ -1,0 +1,30 @@
+<nz-layout class="full-screen">
+  <nz-sider [nzWidth]="260">
+    <div class="profile-container">
+      <div class="back-btn floating-btn" (click)="goBack()">
+        <span class="anticon anticon-left"></span>
+      </div>
+      <img class="avatar" src="./assets/img/default-avatar.png" alt="">
+      <div class="username">
+        {{ username }}
+      </div>
+      <div class="date-count">
+        已经使用 Today {{ dateCount }} 天
+      </div>
+    </div>
+  </nz-sider>
+  <nz-content>
+    <nz-calendar>
+      <ul *nzDateCell="let date" class="todo-list">
+        <div *ngIf="requestForDate(date) as summary" (click)="showSummaryDetail(summary)">
+          <li *ngFor="let item of summary.completedTodos">
+            <nz-badge [nzStatus]="'success'" [nzText]="item"></nz-badge>
+          </li>
+          <li *ngFor="let item of summary.uncompletedTodos">
+            <nz-badge [nzStatus]="'error'" [nzText]="item"></nz-badge>
+          </li>
+        </div>
+      </ul>
+    </nz-calendar>
+  </nz-content>
+</nz-layout>
