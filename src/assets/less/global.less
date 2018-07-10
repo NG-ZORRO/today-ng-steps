@@ -1,3 +1,5 @@
+@import "./variables.less";
+
 * {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -40,3 +42,20 @@ body {
 nz-select.ant-fullcalendar-year-select {
   margin-right: 5px;
 }
+
+.floating-btn {
+  padding: 12px;
+  transition: all 0.2s linear;
+
+  span {
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    transform: translate3d(0, -2px, 0);
+    span {
+      color: @danger;
+    }
+  }
+}
+

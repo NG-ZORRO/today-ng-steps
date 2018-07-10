@@ -7,7 +7,7 @@ import { TodoComponent } from './todo/todo.component';
   styleUrls: [ './right-control.component.less' ]
 })
 export class RightControlComponent implements OnInit {
-  @ViewChild(TodoComponent) private todoList: TodoComponent;
+  @ViewChild(TodoComponent) public todoList: TodoComponent;
 
   constructor() { }
 

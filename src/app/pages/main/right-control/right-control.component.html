@@ -5,7 +5,7 @@
   <nz-content class="list-wrapper">
     <app-todo></app-todo>
   </nz-content>
-  <div class="quick-add-wrapper">
+  <div class="quick-add-wrapper" [class.center]="todoList.todos.length === 0">
     <app-quick-add (add)="add($event)"></app-quick-add>
   </div>
 </nz-layout>
