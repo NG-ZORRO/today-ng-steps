@@ -17,13 +17,12 @@
   <div class="action-btn-wrapper">
     <nz-dropdown [nzPlacement]="'bottomRight'">
       <a nz-dropdown>
-        更多设置
-        <i class="anticon anticon-down"></i>
+        <i class="anticon anticon-setting"></i>
+        设置
       </a>
       <ul nz-menu>
         <li nz-menu-item (click)="toggleCompletedHide()">
-          {{ completedHide ? '显示以完成' : '隐藏已完成' }}
-          <!-- 隐藏已完成 -->
+          {{ completedHide ? '显示已完成' : '隐藏已完成' }}
         </li>
         <li nz-submenu>
           <span title>排序</span>
