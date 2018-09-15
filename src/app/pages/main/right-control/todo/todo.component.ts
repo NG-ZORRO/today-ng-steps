@@ -30,6 +30,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   lists: List[] = [];
   currentContextTodo: Todo;
+  completedHide = false;
 
   constructor(
     private listService: ListService,
@@ -45,6 +46,10 @@ export class TodoComponent implements OnInit, OnDestroy {
         this.lists = lists;
       });
 
+    this.todoService.completedHide$
+      .pipe(takeUntil(this.destory$))
+      .subscribe(hide => this.completedHide = hide);
+
     combineLatest(this.listService.currentUuid$, this.todoService.todo$, this.todoService.rank$)
       .pipe(takeUntil(this.destory$))
       .subscribe(sources => {
@@ -57,6 +62,7 @@ export class TodoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.destory$.next();
+    this.destory$.complete();
   }
 
   private processTodos(listUUID: string, todos: Todo[], rank: RankBy): void {

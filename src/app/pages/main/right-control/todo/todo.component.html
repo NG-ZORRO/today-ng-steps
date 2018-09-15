@@ -1,6 +1,6 @@
 <nz-list *ngIf="todos.length > 0" [nzDataSource]="todos" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
   <ng-template #item let-item>
-    <nz-list-item class="todo-item" (click)="click(item._id)" (contextmenu)="contextMenu($event, todoContextRef, item._id)">
+    <nz-list-item *ngIf="!(item.completedFlag && completedHide)" class="todo-item" (click)="click(item._id)" (contextmenu)="contextMenu($event, todoContextRef, item._id)">
       <nz-list-item-meta [nzTitle]="nzTitle" [nzDescription]="nzDescription">
         <ng-template #nzTitle>
           <label nz-checkbox (click)="$event.stopPropagation()" [(ngModel)]="item.completedFlag" (ngModelChange)="toggle(item._id)"></label>
