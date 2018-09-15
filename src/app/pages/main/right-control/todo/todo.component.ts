@@ -28,6 +28,8 @@ export class TodoComponent implements OnInit, OnDestroy {
   private destory$ = new Subject();
 
   todos: Todo[] = [];
+  all: Todo[] = [];
+  archived: Todo[] = [];
   lists: List[] = [];
   currentContextTodo: Todo;
 
@@ -68,8 +70,11 @@ export class TodoComponent implements OnInit, OnDestroy {
       })
       .map(todo => Object.assign({}, todo) as Todo)
       .sort(rankerGenerator(rank));
-
-    this.todos = [].concat(filteredTodos);
+    this.todos = [ ...filteredTodos ];
+    this.all = this.todos.filter(todo => !todo.archived);
+    this.archived = this.todos.filter(todo => todo.archived);
+    console.log(this.todos);
+    console.log(this.archived);
   }
 
   add(title: string): void {
@@ -107,6 +112,10 @@ export class TodoComponent implements OnInit, OnDestroy {
 
   moveToList(listUuid: string): void {
     this.todoService.moveToList(this.currentContextTodo._id, listUuid);
+  }
+
+  setArchive(archived: boolean): void {
+    this.todoService.setTodoArchive(this.currentContextTodo._id, archived);
   }
 
   close(): void {
