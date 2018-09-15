@@ -61,6 +61,15 @@ export class TodoService {
     }
   }
 
+  setTodoArchive(uuid: string, archived: boolean): void {
+    const todo = this.getByUUID(uuid);
+    if (todo) {
+      todo.archived = archived;
+      this.persist();
+      this.broadCast();
+    }
+  }
+
   moveToList(uuid: string, listUUID: string): void {
     const todo = this.getByUUID(uuid);
     if (todo) {
@@ -97,7 +106,7 @@ export class TodoService {
     const index = this.todos.findIndex(t => t._id === uuid);
     if (index !== -1) {
       this.todos.splice(index, 1);
-      this.persist()
+      this.persist();
       this.broadCast();
     }
   }
