@@ -7,13 +7,11 @@
   <div class="content">
     <div class="body">
 
-      <nz-divider nzType="horizontal" nzText="更换头像"></nz-divider>
-
+      <nz-divider nzType="horizontal" nzText="点击头像，以更换"></nz-divider>
       <nz-upload class="avatar-uploader"  nzName="avatar"
         nzListType="picture-card" [nzShowUploadList]="false" nzAction="https://jsonplaceholder.typicode.com/posts/" [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event,true)">
-        <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
+        <img *ngIf="avatar" [src]="avatar" class="avatar">
       </nz-upload>
-      <nz-progress *ngIf="true" [nzPercent]="progress" [nzShowInfo]="false"></nz-progress>
 
 
       <nz-divider nzType="horizontal" nzText="用户名"></nz-divider>

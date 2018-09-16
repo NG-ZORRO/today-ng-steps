@@ -21,7 +21,7 @@ import { TodoService } from './services/todo/todo.service';
 import { InitGuardService } from './services/init-guard/init-guard.service';
 import { SummaryModule } from './pages/summary/summary.module';
 import { SettingModule } from './pages/setting/setting.module';
-import { AvatarService } from './services/avatar/avatar.service';
+
 registerLocaleData(zh);
 
 @NgModule({
@@ -47,8 +47,7 @@ registerLocaleData(zh);
     ListService,
     TodoService,
     InitGuardService,
-    AvatarService,
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }
