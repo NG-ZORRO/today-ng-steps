@@ -27,6 +27,7 @@ export class TodoService {
   private broadCast(): void {
     this.todo$.next(this.todos);
     this.rank$.next(this.rank);
+    this.completedHide$.next(this.completedHide);
   }
 
   private persist(): void {
@@ -60,6 +61,7 @@ export class TodoService {
       todo.completedFlag = !todo.completedFlag;
       todo.completedAt = todo.completedFlag ? getCurrentTime() : undefined;
       this.persist();
+      this.completedHide$.next(this.completedHide);
     }
   }
 

@@ -30,7 +30,6 @@ export class TodoComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   lists: List[] = [];
   currentContextTodo: Todo;
-  completedHide = false;
 
   constructor(
     private listService: ListService,
@@ -46,14 +45,15 @@ export class TodoComponent implements OnInit, OnDestroy {
         this.lists = lists;
       });
 
-    this.todoService.completedHide$
-      .pipe(takeUntil(this.destory$))
-      .subscribe(hide => this.completedHide = hide);
-
-    combineLatest(this.listService.currentUuid$, this.todoService.todo$, this.todoService.rank$)
+    combineLatest(
+      this.listService.currentUuid$,
+      this.todoService.todo$,
+      this.todoService.rank$,
+      this.todoService.completedHide$
+      )
       .pipe(takeUntil(this.destory$))
       .subscribe(sources => {
-        this.processTodos(sources[ 0 ], sources[ 1 ], sources[ 2 ]);
+        this.processTodos(sources[ 0 ], sources[ 1 ], sources[ 2 ], sources[3]);
       });
 
     this.todoService.getAll();
@@ -65,7 +65,7 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.destory$.complete();
   }
 
-  private processTodos(listUUID: string, todos: Todo[], rank: RankBy): void {
+  private processTodos(listUUID: string, todos: Todo[], rank: RankBy, completedHide: boolean): void {
     const filteredTodos = todos
       .filter(todo => {
         return ((listUUID === 'today' && todo.planAt && floorToDate(todo.planAt) <= getTodayTime())
@@ -73,7 +73,8 @@ export class TodoComponent implements OnInit, OnDestroy {
           || (listUUID === todo.listUUID));
       })
       .map(todo => Object.assign({}, todo) as Todo)
-      .sort(rankerGenerator(rank));
+      .sort(rankerGenerator(rank))
+      .filter(todo => completedHide ? !todo.completedFlag : todo);
 
     this.todos = [].concat(filteredTodos);
   }
