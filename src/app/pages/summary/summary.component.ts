@@ -1,3 +1,4 @@
+import { AvatarService } from './../../services/avatar/avatar.service';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd';
@@ -22,6 +23,7 @@ import { Summary } from '../../../domain/entities';
 export class SummaryComponent implements OnInit {
   username = this.store.get(USERNAME) || 'username';
   dateCount = Math.floor((getTodayTime() - this.store.get(START_USING_DATE)) / ONE_DAY + 1);
+  avatarUrl: string = this.avatarServ.getAvatarUrl();
 
   @HostBinding('@pageSwitchTransition') private state = 'activated';
 
@@ -29,7 +31,8 @@ export class SummaryComponent implements OnInit {
     private summaryService: SummaryService,
     private store: LocalStorageService,
     private router: Router,
-    private noti: NzNotificationService
+    private noti: NzNotificationService,
+    private avatarServ: AvatarService,
   ) { }
 
   ngOnInit() {

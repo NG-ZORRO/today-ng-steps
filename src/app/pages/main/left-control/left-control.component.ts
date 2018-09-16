@@ -1,3 +1,4 @@
+import { AvatarService } from './../../../services/avatar/avatar.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListComponent } from './list/list.component';
@@ -14,10 +15,11 @@ export class LeftControlComponent implements OnInit {
   @ViewChild(ListComponent) listComponent: ListComponent;
 
   username: string;
-
+  avatarUrl: string = this.avatarServ.getAvatarUrl();
   constructor(
     private store: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private avatarServ: AvatarService,
   ) { }
 
   ngOnInit() {
