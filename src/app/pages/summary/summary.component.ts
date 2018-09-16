@@ -10,9 +10,7 @@ import {
 } from '../../services/local-storage/local-storage.namespace';
 import { getTodayTime, ONE_DAY } from '../../../utils/time';
 import { Summary } from '../../../domain/entities';
-
-
-
+import { AVATAR_CODE } from './../../services/local-storage/local-storage.namespace';
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
@@ -22,6 +20,7 @@ import { Summary } from '../../../domain/entities';
 export class SummaryComponent implements OnInit {
   username = this.store.get(USERNAME) || 'username';
   dateCount = Math.floor((getTodayTime() - this.store.get(START_USING_DATE)) / ONE_DAY + 1);
+  avatarUrl: string = this.store.get(AVATAR_CODE) || './assets/img/default-avatar.png';
 
   @HostBinding('@pageSwitchTransition') private state = 'activated';
 
@@ -29,7 +28,7 @@ export class SummaryComponent implements OnInit {
     private summaryService: SummaryService,
     private store: LocalStorageService,
     private router: Router,
-    private noti: NzNotificationService
+    private noti: NzNotificationService,
   ) { }
 
   ngOnInit() {

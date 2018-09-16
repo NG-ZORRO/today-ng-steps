@@ -4,7 +4,7 @@
       <div class="back-btn floating-btn" (click)="goBack()">
         <span class="anticon anticon-left"></span>
       </div>
-      <img class="avatar" src="./assets/img/default-avatar.png" alt="">
+      <img class="avatar" [src]="avatarUrl" alt="avatar">
       <div class="username">
         {{ username }}
       </div>

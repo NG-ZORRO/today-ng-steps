@@ -1,4 +1,4 @@
-ng-zorro-antd@1.1.0
+ng-zorro-antd@1.5.0
 MIT
 MIT
 
@@ -55,6 +55,6 @@ MIT
 date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
 Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
 
-@angular/common@6.0.7
+@angular/common@6.1.7
 MIT
 MIT
