@@ -83,7 +83,6 @@ export class ListComponent implements OnInit, OnDestroy {
     this.renameListModalVisible = true;
     setTimeout(() => {
       const title = this.lists.find(l => l._id === this.contextListUuid).title;
-      console.log(title);
       this.listRenameInput.nativeElement.value = title;
       this.listRenameInput.nativeElement.focus();
     });

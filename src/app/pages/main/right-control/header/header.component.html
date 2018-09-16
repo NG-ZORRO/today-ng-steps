@@ -14,24 +14,32 @@
       </div>
     </nz-dropdown>
   </div>
-  <div class="sort-btn-wrapper">
+  <div class="action-btn-wrapper">
     <nz-dropdown [nzPlacement]="'bottomRight'">
       <a nz-dropdown>
-        排序
-        <i class="anticon anticon-down"></i>
+        <i class="anticon anticon-setting"></i>
+        设置
       </a>
-      <ul nz-menu nzSelectable>
-        <li nz-menu-item (click)="switchRankType('title')">
-          名称
+      <ul nz-menu>
+        <li nz-menu-item (click)="toggleCompletedHide()">
+          {{ completedHide ? '显示已完成' : '隐藏已完成' }}
         </li>
-        <li nz-menu-item (click)="switchRankType('planAt')">
-          计划时间
-        </li>
-        <li nz-menu-item (click)="switchRankType('dueAt')">
-          截止时间
-        </li>
-        <li nz-menu-item (click)="switchRankType('completeFlag')">
-          完成状态
+        <li nz-submenu>
+          <span title>排序</span>
+          <ul nzSelectable class="sort-option-list">
+            <li nz-menu-item (click)="switchRankType('title')">
+              名称
+            </li>
+            <li nz-menu-item (click)="switchRankType('planAt')">
+              计划时间
+            </li>
+            <li nz-menu-item (click)="switchRankType('dueAt')">
+              截止时间
+            </li>
+            <li nz-menu-item (click)="switchRankType('completeFlag')">
+              完成状态
+            </li>
+          </ul>
         </li>
       </ul>
     </nz-dropdown>

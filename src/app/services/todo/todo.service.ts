@@ -11,9 +11,11 @@ import { RankBy } from '../../../domain/type';
 export class TodoService {
   todo$ = new Subject<Todo[]>();
   rank$ = new Subject<RankBy>();
+  completedHide$ = new Subject<boolean>();
 
   private todos: Todo[] = [];
   private rank: RankBy = 'title';
+  private completedHide = false;
 
   constructor(
     private listService: ListService,
@@ -25,6 +27,7 @@ export class TodoService {
   private broadCast(): void {
     this.todo$.next(this.todos);
     this.rank$.next(this.rank);
+    this.completedHide$.next(this.completedHide);
   }
 
   private persist(): void {
@@ -58,6 +61,7 @@ export class TodoService {
       todo.completedFlag = !todo.completedFlag;
       todo.completedAt = todo.completedFlag ? getCurrentTime() : undefined;
       this.persist();
+      this.completedHide$.next(this.completedHide);
     }
   }
 
@@ -97,7 +101,7 @@ export class TodoService {
     const index = this.todos.findIndex(t => t._id === uuid);
     if (index !== -1) {
       this.todos.splice(index, 1);
-      this.persist()
+      this.persist();
       this.broadCast();
     }
   }
@@ -110,5 +114,10 @@ export class TodoService {
   toggleRank(r: RankBy): void {
     this.rank = r;
     this.rank$.next(r);
+  }
+
+  toggleCompletedHide(hide: boolean): void {
+    this.completedHide = hide;
+    this.completedHide$.next(hide);
   }
 }
