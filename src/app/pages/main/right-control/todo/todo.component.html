@@ -5,6 +5,7 @@
         <ng-template #nzTitle>
           <label nz-checkbox (click)="$event.stopPropagation()" [(ngModel)]="item.completedFlag" (ngModelChange)="toggle(item._id)"></label>
           <span [class.strikethrough]="item.completedFlag">{{ item.title }}</span>
+          <nz-tag *ngFor="let tagName of item.tags">{{ tagName }}</nz-tag>
         </ng-template>
         <ng-template #nzDescription>
           <span *ngIf="item.dueAt" class="todo-desc">

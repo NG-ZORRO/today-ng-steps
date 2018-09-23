@@ -11,6 +11,7 @@ export class Todo {
   dueAt: number;
   planAt: number;
   notifyMe = false;
+  tags: string[] = [];
 
   constructor(title: string, listUUID?: string) {
     this._id = generateUUID();
