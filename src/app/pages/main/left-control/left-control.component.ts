@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
 import { USERNAME } from '../../../services/local-storage/local-storage.namespace';
-
+import { AVATAR_CODE } from './../../../services/local-storage/local-storage.namespace';
 @Component({
   selector: 'app-left-control',
   templateUrl: './left-control.component.html',
@@ -14,10 +14,10 @@ export class LeftControlComponent implements OnInit {
   @ViewChild(ListComponent) listComponent: ListComponent;
 
   username: string;
-
+  avatarUrl: string = this.store.get(AVATAR_CODE) || './assets/img/default-avatar.png';
   constructor(
     private store: LocalStorageService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {

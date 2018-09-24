@@ -46,8 +46,8 @@ registerLocaleData(zh);
     LocalStorageService,
     ListService,
     TodoService,
-    InitGuardService
+    InitGuardService,
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }
