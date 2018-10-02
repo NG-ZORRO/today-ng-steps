@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit {
       const id = paramsMap.get('id');
       const todo = this.todoService.getByUUID(id);
       this.trueSource = todo;
-      this.currentTodo = { ...todo, tags: [...todo.tags] };
+      this.currentTodo = { ...todo, tags: [...(todo.tags || [])] };
       if (todo.dueAt) {
         this.dueDate = new Date(todo.dueAt);
       }
