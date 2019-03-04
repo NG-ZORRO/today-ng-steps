@@ -12,9 +12,9 @@ import { RankBy } from '../../../../../domain/type';
 
 const rankerGenerator = (type: RankBy = 'title'): any => {
   if (type === 'completeFlag') {
-    return (t1: Todo, t2: Todo) => t1.completedFlag && !t2.completedFlag;
+    return (t1: Todo, t2: Todo) => (t1.completedFlag as any) - (t2.completedFlag as any);
   }
-  return (t1: Todo, t2: Todo) => t1[ type ] > t2[ type ];
+  return (t1: Todo, t2: Todo) => (t1[ type ] as any) - (t2[ type ] as any);
 };
 
 
