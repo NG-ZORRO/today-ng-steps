@@ -1,4 +1,4 @@
-import { generateUUID } from '../utils/uuid';
+import { generateUUID } from 'utils/uuid';
 
 export class Todo {
   _id: string;

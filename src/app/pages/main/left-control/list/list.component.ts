@@ -14,14 +14,14 @@ import {
 } from 'ng-zorro-antd';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { List } from '../../../../../domain/entities';
-import { ListService } from '../../../../services/list/list.service';
-import { TodoService } from '../../../../services/todo/todo.service';
+
+import { List } from 'domain/entities';
+import { ListService, TodoService } from 'services';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: [ './list.component.css' ]
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit, OnDestroy {
   @Input() isCollapsed: boolean;
@@ -42,14 +42,12 @@ export class ListComponent implements OnInit, OnDestroy {
     private listService: ListService,
     private todoService: TodoService,
     private modal: NzModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.listService.lists$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(lists => {
-        this.lists = lists;
-      });
+    this.listService.lists$.pipe(takeUntil(this.destroy$)).subscribe(lists => {
+      this.lists = lists;
+    });
 
     this.listService.currentUuid$
       .pipe(takeUntil(this.destroy$))
@@ -88,7 +86,11 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
-  contextMenu($event: MouseEvent, template: TemplateRef<void>, uuid: string): void {
+  contextMenu(
+    $event: MouseEvent,
+    template: TemplateRef<void>,
+    uuid: string
+  ): void {
     this.dropdown = this.dropdownService.create($event, template);
     this.contextListUuid = uuid;
   }

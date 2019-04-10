@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { ListService } from '../list/list.service';
-import { floorToMinute, ONE_HOUR, getCurrentTime } from '../../../utils/time';
-import { Todo } from '../../../domain/entities';
+import { floorToMinute, ONE_HOUR, getCurrentTime } from 'utils/time';
+import { Todo } from 'domain/entities';
+import { RankBy } from 'domain/type';
+
 import { TODOS } from '../local-storage/local-storage.namespace';
-import { RankBy } from '../../../domain/type';
 
 @Injectable()
 export class TodoService {
@@ -44,7 +46,7 @@ export class TodoService {
   }
 
   getByUUID(uuid: string): Todo | null {
-    return this.todos.filter((todo: Todo) => todo._id === uuid)[ 0 ] || null;
+    return this.todos.filter((todo: Todo) => todo._id === uuid)[0] || null;
   }
 
   setTodoToday(uuid: string): void {
