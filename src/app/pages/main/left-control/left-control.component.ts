@@ -7,7 +7,7 @@ import { USERNAME } from '../../../services/local-storage/local-storage.namespac
 @Component({
   selector: 'app-left-control',
   templateUrl: './left-control.component.html',
-  styleUrls: [ './left-control.component.less' ]
+  styleUrls: ['./left-control.component.less']
 })
 export class LeftControlComponent implements OnInit {
   @Input() isCollapsed: boolean;
@@ -15,10 +15,7 @@ export class LeftControlComponent implements OnInit {
 
   username: string;
 
-  constructor(
-    private store: LocalStorageService,
-    private router: Router
-  ) { }
+  constructor(private store: LocalStorageService, private router: Router) {}
 
   ngOnInit() {
     this.username = this.store.get(USERNAME);

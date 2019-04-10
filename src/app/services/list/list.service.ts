@@ -4,12 +4,10 @@ import { LocalStorageService } from '../local-storage/local-storage.service';
 import { List } from '../../../domain/entities';
 import { LISTS } from '../local-storage/local-storage.namespace';
 
-
 type SpecialListUUID = 'today' | 'todo';
 
 @Injectable()
 export class ListService {
-
   private current: List;
   private lists: List[] = [];
 
@@ -18,9 +16,7 @@ export class ListService {
   current$ = new Subject<List>();
   lists$ = new Subject<List[]>();
 
-  constructor(
-    private store: LocalStorageService
-  ) { }
+  constructor(private store: LocalStorageService) {}
 
   private broadCast(): void {
     this.lists$.next(this.lists);
@@ -83,10 +79,10 @@ export class ListService {
     if (i !== -1) {
       this.lists.splice(i, 1);
       this.currentUuid = this.lists.length
-        ? this.lists[ this.lists.length - 1 ]._id
+        ? this.lists[this.lists.length - 1]._id
         : this.currentUuid === 'today'
-          ? 'today'
-          : 'todo';
+        ? 'today'
+        : 'todo';
       this.broadCast();
       this.persist();
     }
