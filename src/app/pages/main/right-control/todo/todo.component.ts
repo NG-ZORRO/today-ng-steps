@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzDropdownService, NzDropdownContextComponent } from 'ng-zorro-antd';
 import { combineLatest, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
+
 import { Todo, List } from '../../../../../domain/entities';
 import { TodoService } from '../../../../services/todo/todo.service';
 import { ListService } from '../../../../services/list/list.service';
@@ -14,7 +15,10 @@ const rankerGenerator = (type: RankBy = 'title'): any => {
   if (type === 'completeFlag') {
     return (t1: Todo, t2: Todo) => t1.completedFlag && !t2.completedFlag;
   }
-  return (t1: Todo, t2: Todo) => t1[ type ] > t2[ type ];
+
+  return (t1: Todo, t2: Todo) => {
+    return t1[ type ] > t2[ type ] ? 1 : -1;
+  };
 };
 
 
@@ -53,7 +57,7 @@ export class TodoComponent implements OnInit, OnDestroy {
       )
       .pipe(takeUntil(this.destory$))
       .subscribe(sources => {
-        this.processTodos(sources[ 0 ], sources[ 1 ], sources[ 2 ], sources[3]);
+        this.processTodos(sources[ 0 ], sources[ 1 ], sources[ 2 ], sources[ 3 ]);
       });
 
     this.todoService.getAll();
@@ -76,7 +80,7 @@ export class TodoComponent implements OnInit, OnDestroy {
       .sort(rankerGenerator(rank))
       .filter(todo => completedHide ? !todo.completedFlag : todo);
 
-    this.todos = [].concat(filteredTodos);
+    this.todos = [...filteredTodos];
   }
 
   add(title: string): void {
