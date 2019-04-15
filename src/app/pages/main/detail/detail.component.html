@@ -11,6 +11,28 @@
     </div>
     <label nz-checkbox (click)="$event.stopPropagation()" [(ngModel)]="currentTodo.completedFlag"></label>
     <span>标记完成</span>
+    <nz-divider nzText="标签" nzOrientation="left"></nz-divider>
+    <div class="input-container">
+      <nz-tag
+        *ngFor="let tagName of currentTodo.tags; let i = index"
+        nzMode="closeable"
+        (nzAfterClose)="handleTagClose(i)">{{ tagName }}</nz-tag>
+      <nz-tag
+        *ngIf="!addTagInputVisible"
+        class="editable-tag"
+        (click)="showAddTagInput()">
+        <i class="anticon anticon-plus"></i> New Tag
+      </nz-tag>
+      <input
+        *ngIf="addTagInputVisible"
+        #tagNameInput
+        style="width: 78px;"
+        nz-input
+        [(ngModel)]="newTagName"
+        nzSize="small"
+        (blur)="handleAddTagConfirm()"
+        (keyup.enter)="handleAddTagConfirm()">
+    </div>
     <nz-divider nzText="标题" nzOrientation="left"></nz-divider>
     <div class="input-container">
       <input nz-input [(ngModel)]="currentTodo.title" placeholder="待办事项" [disabled]="!!currentTodo.completedFlag" id="title" name="title">

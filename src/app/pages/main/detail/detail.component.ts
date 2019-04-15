@@ -3,7 +3,9 @@ import {
   EventEmitter,
   OnInit,
   Output,
-  HostBinding
+  HostBinding,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -30,11 +32,15 @@ import { detailTransition } from './detail.animation';
 export class DetailComponent implements OnInit {
   @HostBinding('@detailTransition') state = 'activated';
   @Output() changedTodo = new EventEmitter();
+  @ViewChild('tagNameInput') tagNameInput: ElementRef;
 
   private trueSource: Todo;
   currentTodo: Todo;
   dueDate: Date;
   planDate: Date;
+  tags: string[];
+  addTagInputVisible = false;
+  newTagName = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +54,7 @@ export class DetailComponent implements OnInit {
       const id = paramsMap.get('id');
       const todo = this.todoService.getByUUID(id);
       this.trueSource = todo;
-      this.currentTodo = Object.assign({}, todo) as Todo;
+      this.currentTodo = { ...todo, tags: [...(todo.tags || [])] };
       if (todo.dueAt) {
         this.dueDate = new Date(todo.dueAt);
       }
@@ -113,5 +119,24 @@ export class DetailComponent implements OnInit {
   delete(): void {
     this.todoService.delete(this.currentTodo._id);
     this.goBack();
+  }
+
+  showAddTagInput(): void {
+    this.addTagInputVisible = true;
+    setTimeout(() => {
+      this.tagNameInput.nativeElement.focus();
+    }, 10);
+  }
+
+  handleAddTagConfirm(): void {
+    if (this.newTagName && this.currentTodo.tags.indexOf(this.newTagName) ===  -1) {
+      this.currentTodo.tags.push(this.newTagName);
+    }
+    this.newTagName = '';
+    this.addTagInputVisible = false;
+  }
+
+  handleTagClose(index: number): void {
+    this.currentTodo.tags.splice(index, 1);
   }
 }
