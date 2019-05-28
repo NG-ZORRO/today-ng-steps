@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, zh_CN, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
@@ -21,6 +21,7 @@ import { TodoService } from './services/todo/todo.service';
 import { InitGuardService } from './services/init-guard/init-guard.service';
 import { SummaryModule } from './pages/summary/summary.module';
 import { SettingModule } from './pages/setting/setting.module';
+import en from '@angular/common/locales/en';
 
 registerLocaleData(zh);
 
