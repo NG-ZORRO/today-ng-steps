@@ -6,7 +6,7 @@
       [nzSelected]="currentListUuid === 'today'"
       (click)="click('today')">
     <span>
-      <i class="anticon anticon-home"></i>
+      <i nz-icon nzType="home"></i>
       <span class="nav-text">Today</span>
     </span>
   </li>
@@ -14,7 +14,7 @@
       (click)="click('todo')"
       [nzSelected]="currentListUuid === 'todo'">
     <span>
-      <i class="anticon anticon-calendar"></i>
+      <i nz-icon nzType="calendar"></i>
       <span class="nav-text">TODO</span>
     </span>
   </li>
@@ -24,7 +24,7 @@
       (click)="click(list._id)"
       (contextmenu)="contextMenu($event, contextTemplate, list._id)">
     <span>
-      <i class="anticon anticon-bars"></i>
+      <i nz-icon nzType="bars"></i>
       <span class="nav-text">{{ list.title }}</span>
     </span>
   </li>
@@ -37,13 +37,13 @@
       (nzClick)="close()">
     <li nz-menu-item
         (click)="openRenameListModal()">
-      <i class="anticon anticon-edit anticon-right-margin"></i>
+      <i nz-icon nzType="edit" class="anticon-right-margin"></i>
       <span>重命名</span>
     </li>
     <li nz-menu-divider></li>
     <li nz-menu-item
         (click)="delete()">
-      <i class="anticon anticon-delete anticon-right-margin danger"></i>
+      <i nz-icon nzType="delete" class="anticon-right-margin danger"></i>
       <span class="danger">删除列表</span>
     </li>
   </ul>

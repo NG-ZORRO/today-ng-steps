@@ -2,11 +2,11 @@
   <div class="container" (click)="$event.stopPropagation()">
     <div style="text-align: right;">
       <button nz-button nzType="primary" nzSize="large" nzShape="circle" (click)="confirm()" style="margin-right: 10px;">
-        <i class="anticon anticon-check"></i>
+        <i nz-icon type="check"></i>
       </button>
       <button nz-button nz-popconfirm nzPlacement="bottomRight" nzTitle="你真的要删除这条待办事项吗？" (nzOnConfirm)="delete()" nzType="danger"
         nzSize="large" nzShape="circle">
-        <i class="anticon anticon-delete"></i>
+        <i nz-icon type="delete"></i>
       </button>
     </div>
     <label nz-checkbox (click)="$event.stopPropagation()" [(ngModel)]="currentTodo.completedFlag"></label>
