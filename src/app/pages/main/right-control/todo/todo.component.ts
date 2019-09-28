@@ -13,7 +13,7 @@ import { RankBy } from '../../../../../domain/type';
 
 const rankerGenerator = (type: RankBy = 'title'): any => {
   if (type === 'completeFlag') {
-    return (t1: Todo, t2: Todo) => t1.completedFlag && !t2.completedFlag;
+    return (t1: Todo, t2: Todo) => t1.completedFlag && !t2.completedFlag ? 1 : -1;
   }
 
   return (t1: Todo, t2: Todo) => {
