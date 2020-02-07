@@ -35,13 +35,16 @@ export class DetailComponent implements OnInit {
   currentTodo: Todo;
   dueDate: Date;
   planDate: Date;
+  nzStyle = {
+    width: '100%'
+  };
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private todoService: TodoService,
     private message: NzMessageService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(first()).subscribe((paramsMap: ParamMap) => {
