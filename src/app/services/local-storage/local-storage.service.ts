@@ -6,11 +6,11 @@ const ls = localStorage;
 export class LocalStorageService {
   constructor() { }
 
-  public get<T>(key: string): any {
+  public get<T>(key: string): T {
     return JSON.parse(ls.getItem(key)) as T;
   }
 
-  public getList<T>(key: string) {
+  public getList<T>(key: string): T[] {
     const before = ls.getItem(key);
     return before ? (JSON.parse(before) as T[]) : [];
   }
